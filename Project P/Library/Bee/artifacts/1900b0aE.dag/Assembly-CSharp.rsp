@@ -401,6 +401,7 @@
 -analyzer:"E:/unity/6000.0.24f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
 "Assets/Scripts/MazeGenerator.cs"
 "Assets/Scripts/MzeCell.cs"
+"Assets/Scripts/PlayerMove.cs"
 -langversion:9.0
 /deterministic
 /optimize+
