@@ -20,6 +20,12 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField]
     private Vector2Int exitPosition;
 
+    [SerializeField]
+    private GameObject itemMaze;
+
+    [SerializeField]
+    private int numberOfItem;
+
 
     private MzeCell[,] mazeGrid;
 
@@ -34,6 +40,7 @@ public class MazeGenerator : MonoBehaviour
 
         yield return GenerateMaze(null, mazeGrid[0,0]);
         CreateEntranceAndExit();
+        SpawnItem();
     }
 
     private IEnumerator GenerateMaze(MzeCell previousCell, MzeCell currentCell){
@@ -134,5 +141,28 @@ public class MazeGenerator : MonoBehaviour
             return;
         }
     }
+
+    private void SpawnItem(){
+        HashSet<Vector2Int> usedPositions = new HashSet<Vector2Int>();
+
+        for(int i = 0; i < numberOfItem; i++)
+        {
+            Vector2Int randomPosition;
+
+            do{
+                int x = Random.Range(0, mazeWidth);
+                int z = Random.Range(0, mazeDepth);
+                randomPosition = new Vector2Int(x, z);
+            } while(randomPosition == entrancePosition || randomPosition == exitPosition || usedPositions.Contains(randomPosition));
+
+            usedPositions.Add(randomPosition);
+
+            var cell = mazeGrid[randomPosition.x, randomPosition.y];
+
+            Instantiate(itemMaze, cell.transform.position + Vector3.up * 0.5f, Quaternion.identity);
+        }
+    }
     
 }
+
+    
